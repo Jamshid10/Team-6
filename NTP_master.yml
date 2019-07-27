@@ -1,0 +1,45 @@
+---
+- hosts: practice
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install NTP
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - ntp
+      state: latest
+
+  - name: config NTP
+    template:
+      src: /ansible/templates/ntp/ntp.conf
+      dest: /etc/ntp.conf
+    notify:
+    - restart NTP
+
+  - name: ensure NTP is runnig
+    service:
+      name: ntpd
+      state: restarted
+
+  - name: add ntp service to firewall
+    firewalld:
+      service: ntp
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+  - name: add ports to firewall
+    firewalld:
+      port: 123/udp
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+  handlers:
+  - name : restart NTP
+    service:
+      name: ntpd
+      state: started
