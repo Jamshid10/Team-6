@@ -1,0 +1,41 @@
+$TTL 1D
+@	IN SOA	prdx-nsmaster16.ziyotek6.local. root.prdx-nsmaster16.ziyotek6.local. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+;; name server or DNS server
+
+
+        IN     NS    prdx-nsmaster16.ziyotek6.local.
+	IN     NS    prdx-nsworker16.ziyotek6.local.
+	IN     NS    prdx-nsworker26.ziyotek6.local.
+; PTR records
+50      IN     PTR   prdx-nsmaster16.ziyotek6.local.
+11      IN     PTR    prdx-nsworker16.ziyotek6.local.
+12      IN     PTR    prdx-nsworker26.ziyotek6.local. 
+61      IN     PTR   prdx-ntp26.ziyotek6.local.
+60      IN     PTR   prdx-ntp16.ziyotek6.local.
+62      IN     PTR   prdx-pxe16.ziyotek6.local.
+51      IN     PTR   prdx-mail16.ziyotek6.local.	
+52      IN     PTR   prdx-samba16.ziyotek6.local.
+53      IN     PTR   prdx-ftp16.ziyotek6.local.
+100     IN     PTR   prdx-nagios16.ziyotek6.local.
+58      IN     PTR   prdx-haproxy167.ziyotek6.local.
+68      IN     PTR   prdx-webserver267.ziyotek6.local.
+55      IN     PTR   prdx-db166.ziyotek6.local.
+56      IN     PTR   prdx-db167.ziyotek6.local.
+57      IN     PTR   prdx-haproxy166.ziyotek6.local.
+59      IN     PTR   prdx-webserver166.ziyotek6.local.
+66      IN     PTR   prdx-webserver167.ziyotek6.local.
+67      IN     PTR   prdx-webserver266.ziyotek6.local.
+68      IN     PTR   prdx-webserver267.ziyotek6.local.
+63      IN     PTR   prdx-webserver366.ziyotek6.local.
+64      IN     PTR   prdx-webserver367.ziyotek6.local.
+65      IN     PTR   prdx-nfs16.ziyotek6.local.
+54      IN     PTR   prdx-jenkins16.ziyotek6.local.
+69      IN     PTR   prdx-ldap16.ziyotek6.local.
+90      IN     PTR   prdx-docker16.ziyotek6.local.
+41      IN     PTR   prdx-webserver166.ziyotek6.local.
+150     IN     PTR   prdx-ansible16.ziyotek6.local.

@@ -1,0 +1,12 @@
+<VirtualHost *:80>
+<Proxy balancer://mycluster>
+BalancerMember http://192.168.46.66:80
+BalancerMember http://192.168.46.68:80
+BalancerMember http://192.168.46.64:80
+</Proxy>
+
+ProxyPreserveHost On
+
+ProxyPass / balancer://mycluster/
+ProxyPassReverse / balancer://mycluster/
+</VirtualHost>

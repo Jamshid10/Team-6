@@ -1,0 +1,18 @@
+---
+- hosts: all
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install main packages
+    yum:
+      name: "{{ packages }}"
+    vars: 
+      packages:
+      - bind-utils
+      - man
+      - man-pages
+      - mlocate
+      - sysstat
+      state: latest
+      

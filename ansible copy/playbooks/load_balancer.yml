@@ -1,0 +1,172 @@
+---
+- hosts: load_balancer
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Install Apache
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - httpd
+      state: latest
+
+  - name: ensure Apache is running
+    service:
+      name: httpd
+      state: started
+
+  - name: start firewall
+    service:
+      name: firewalld
+      state: started
+
+  - name: add service to firewall
+    firewalld:
+      service: http
+      permanent: yes
+      immediate: yes
+      state: enabled 
+
+  - name: Configure load balancer
+    template:
+      src: /ansible/templates/load_balancer/load_balancer.conf.j2
+      dest: /etc/httpd/conf.d/load_balancer.conf
+    notify:
+    - restart Apache
+
+  handlers:
+  - name : restart Apache
+    service:
+      name: named
+      state: restarted
+
+- hosts: webserver_1
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Install Apache
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - httpd
+      state: latest
+
+  - name: ensure Apache is running
+    service:
+      name: httpd
+      state: started
+
+  - name: start firewall
+    service:
+      name: firewalld
+      state: started
+
+  - name: add service to firewall
+    firewalld:
+      service: http
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+  - name: Configure load balancer
+    template:
+      src: /ansible/templates/load_balancer/webservers/index1.html.j2
+      dest: /var/www/html/index.html
+    notify:
+    - restart Apache
+
+  handlers:
+  - name : restart Apache
+    service:
+      name: httpd
+      state: restarted
+
+- hosts: webserver_2
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Install Apache
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - httpd
+      state: latest
+
+  - name: ensure Apache is running
+    service:
+      name: httpd
+      state: started
+
+  - name: start firewall
+    service:
+      name: firewalld
+      state: started
+
+  - name: add service to firewall
+    firewalld:
+      service: http
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+  - name: Configure load balancer
+    template:
+      src: /ansible/templates/load_balancer/webservers/index2.html.j2
+      dest: /var/www/html/index.html
+    notify:
+    - restart Apache
+
+  handlers:
+  - name : restart Apache
+    service:
+      name: httpd
+      state: restarted
+
+- hosts: webserver_3
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: Install Apache
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - httpd
+      state: latest
+
+  - name: ensure Apache is running
+    service:
+      name: httpd
+      state: started
+
+  - name: start firewall
+    service:
+      name: firewalld
+      state: started
+
+  - name: add service to firewall
+    firewalld:
+      service: http
+      permanent: yes
+      immediate: yes
+      state: enabled
+
+  - name: Configure load balancer
+    template:
+      src: /ansible/templates/load_balancer/webservers/index3.html.j2
+      dest: /var/www/html/index.html
+    notify:
+    - restart Apache
+
+  handlers:
+  - name : restart Apache
+    service:
+      name: httpd
+      state: restarted

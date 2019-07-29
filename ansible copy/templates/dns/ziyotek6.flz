@@ -1,0 +1,35 @@
+$TTL 1D
+@	IN SOA	 prdx-nsmaster16.ziyotek6.local. root.prdx-nsmaster16.ziyotek6.local. (
+					20190718	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+; name server NS records
+             IN    NS  prdx-nsmaster16.ziyotek6.local.
+             IN    NS  prdx-nsworker16.ziyotek6.local.
+             IN    NS  prdx-nsworker26.ziyotek6.local.
+
+prdx-nsworker16    IN    A      192.168.46.11
+prdx-nsworker26    IN    A      192.168.46.12
+prdx-nsmaster16    IN    A      192.168.46.50
+prdx-mail16        IN    A      192.168.46.51
+prdx-samba16       IN    A      192.168.46.52
+prdx-ftp16         IN    A      192.168.46.53
+prdx-jenkins16     IN    A      192.168.46.54
+prdx-db166         IN    A      192.168.46.55
+prdx-db167         IN    A      192.168.46.56
+prdx-haproxy167    IN    A      192.168.46.58
+prdx-ntp16         IN    A      192.168.46.60
+prdx-ntp26         IN    A      192.168.46.61
+prdx-pxe16         IN    A      192.168.46.62
+prdx-webserver367  IN    A      192.168.46.64
+prdx-nfs16         IN    A      192.168.46.65
+prdx-webserver167  IN    A      192.168.46.66
+prdx-webserver267  IN    A      192.168.46.68
+prdx-ldap16        IN    A      192.168.46.69
+prdx-docker16      IN    A      192.168.46.90
+prdx-nagios16      IN    A      192.168.46.100
+prdx-ansible16	   IN    A      192.168.46.150
+;######## CNAME 
+;db166		IN	CNAME	prdx-db166.ziyotek6.local.

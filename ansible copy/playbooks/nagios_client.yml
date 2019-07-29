@@ -1,0 +1,33 @@
+---
+- hosts: db_7
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install EPEL NRPE Nagios Plugins
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - epel-release
+      state: latest
+
+  - name: install NRPE
+    yum: 
+      name: nrpe
+      state: latest
+
+  - name: install Nagios Plugins
+    yum:
+      name: nagios-plugins-all
+      state: latest
+
+  - name: Config NRPE
+    template:
+      src: /ansible/templates/nagios/nrpe.cfg.j2
+      dest: /etc/nagios/nrpe.cfg
+
+  - name: start NRPE
+    service: 
+      name: nrpe
+      state: started
