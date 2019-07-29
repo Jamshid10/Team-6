@@ -1,0 +1,42 @@
+---
+- hosts: dns
+  remote_user: ansible
+  become: yes
+
+  tasks:
+  - name: install DNS
+    yum:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - bind
+      - bind-utils
+      state: latest
+
+  - name: config DNS
+    template:
+      src: /ansible/templates/named.conf
+      dest: /etc/named.conf
+    notify:
+    - restart DNS
+
+  - name: copy zone files
+    copy:
+      dest: /var/named/ziyotek6.flz
+      src: /ansible/templates/ziyotek6.flz
+
+  - name: copy zone files
+    copy:
+      dest: /var/named/ziyotek6.rlz
+      src: /ansible/templates/ziyotek6.rlz
+
+  - name: ensure DNS is runnig
+    service:
+      name: named
+      state: restarted
+
+  handlers:
+  - name : restart DNS
+    service:
+      name: named
+      state: started
